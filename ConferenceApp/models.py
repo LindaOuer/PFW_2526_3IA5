@@ -59,5 +59,5 @@ class OrganizingCommittee(models.Model):
 ]
     conference = models.ForeignKey(Conference, on_delete=models.CASCADE, related_name="committee_members")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="committees")
-    committee_role = models.CharField(max_length=100,choices=ROLE_CHOICES,default="comite")
+    committee_role = models.CharField(max_length=100,choices=ROLE_CHOICES,default="committee")
     date_joined = models.DateField(auto_now_add=True)
