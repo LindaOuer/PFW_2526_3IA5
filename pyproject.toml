@@ -1,0 +1,7 @@
+[project]
+name = "pfw-2526-3ia5"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
