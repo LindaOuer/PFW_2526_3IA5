@@ -1,25 +1,47 @@
 <table border="1">
-    <tr>
-        <td>Title</td>
-        <td>Start Date</td>
-        <td>End Date</td>
-        <td>Location</td>
-    </tr>
-    {% for conf in conferences %}
+  <tr>
+    <td>Title</td>
+    <td>Start Date</td>
+    <td>End Date</td>
+    <td>Location</td>
+    <td>Actions</td>
+  </tr>
+  {% for conf in conferences %}
 
-    <tr>
-        <td>{{ conf.name }}</td>
-        <td>{{ conf.start_date }}</td>
-        <td>{{ conf.end_date }}</td>
-        <td>{{ conf.location }}</td>
-    </tr>
-    {% empty %}
-    <p>No Conferences available!</p>
-    {% endfor %}
+  <tr>
+    <td>{{ conf.name }}</td>
+    <td>{{ conf.start_date }}</td>
+    <td>{{ conf.end_date }}</td>
+    <td>{{ conf.location }}</td>
+    <td class="text-center">
+      <a
+        href="{% url 'conference_detail' conf.conference_id %}"
+        class="btn btn-sm btn-primary me-1"
+        title="Détails"
+      >
+        <i class="fa fa-eye"></i> Détails
+      </a>
+      <a
+        href="{% url 'conference_update' conf.conference_id %}"
+        class="btn btn-sm btn-warning me-1"
+        title="Modifier"
+      >
+        <i class="fa fa-edit"></i>Modifier
+      </a>
+      <form
+        method="post"
+        action="{% url 'conference_delete' conf.conference_id %}"
+        style="display: inline"
+        onsubmit="return confirm('Supprimer cette conférence ?');"
+      >
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm btn-danger" title="Supprimer">
+          <i class="fa fa-trash"></i> Supprimer
+        </button>
+      </form>
+    </td>
+  </tr>
+  {% empty %}
+  <p>No Conferences available!</p>
+  {% endfor %}
 </table>
-<tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>

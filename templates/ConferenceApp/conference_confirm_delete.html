@@ -1,0 +1,38 @@
+
+    <div class="text-center my-5">
+        <h1 class="display-5 mb-4 text-danger">
+            <i class="fa fa-trash me-2"></i> Confirmer la Suppression
+        </h1>
+        <p class="lead fs-4 text-muted">Cette action est irréversible.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5 text-center">
+                    <h3 class="card-title text-primary">
+                        <i class="fa fa-tag me-2"></i> {{ object.name }}
+                    </h3>
+                    <p class="card-text fs-5">
+                        <strong>Thème :</strong> <span class="badge bg-secondary">{{ object.get_theme_display }}</span><br>
+                        <strong>Lieu :</strong> {{ object.location }}<br>
+                        <strong>Dates :</strong> {{ object.start_date|date:"d/m/Y" }} - {{ object.end_date|date:"d/m/Y" }}<br>
+                        <strong>Description :</strong> {{ object.description|truncatewords:20 }}<br>
+                        <strong>Créée le :</strong> {{ object.created_at|date:"d/m/Y H:i" }}<br>
+                        <strong>Mise à jour :</strong> {{ object.updated_at|date:"d/m/Y H:i" }}
+                    </p>
+                    <hr class="my-4">
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-lg px-5 me-3">
+                            <i class="fa fa-trash me-2"></i> Supprimer
+                        </button>
+                        <a href="{% url 'conference_list_view' %}" class="btn btn-secondary btn-lg px-5">
+                            <i class="fa fa-arrow-left me-2"></i> Annuler
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

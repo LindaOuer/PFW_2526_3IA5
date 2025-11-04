@@ -1,0 +1,70 @@
+
+    <div class="text-center my-5">
+        <h1 class="display-5 mb-4 text-primary">
+            <i class="fa fa-info-circle me-2"></i> Détails de la Conférence
+        </h1>
+        <p class="lead fs-4 text-muted">Toutes les informations sur <strong>{{ object.name }}</strong>.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">
+                        <i class="fa fa-tag me-2"></i> {{ object.name }}
+                    </h3>
+                </div>
+                <div class="card-body p-5">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong><i class="fa fa-palette me-2"></i> Thème :</strong>
+                            <span class="badge bg-secondary ms-2">{{ object.get_theme_display }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong><i class="fa fa-map-marker me-2"></i> Lieu :</strong> {{ object.location }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong><i class="fa fa-calendar me-2"></i> Dates :</strong>
+                            Du {{ object.start_date|date:"d/m/Y" }} au {{ object.end_date|date:"d/m/Y" }}
+                            <small class="text-muted ms-2">(Durée : {{ object.end_date|timeuntil:object.start_date }})</small>
+                        </li>
+                        <li class="list-group-item">
+                            <strong><i class="fa fa-info-circle me-2"></i> Description :</strong>
+                            <p class="mt-2 mb-0">{{ object.description|linebreaks }}</p>
+                        </li>
+                        <li class="list-group-item">
+                            <strong><i class="fa fa-clock-o me-2"></i> Créée le :</strong> {{ object.created_at|date:"d/m/Y à H:i" }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong><i class="fa fa-refresh me-2"></i> Mise à jour :</strong> {{ object.updated_at|date:"d/m/Y à H:i" }}
+                        </li>
+                    </ul>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <a href="{% url 'conference_list_view' %}" class="btn btn-secondary btn-lg px-5 me-3">
+                            <i class="fa fa-arrow-left me-2"></i> Retour à la Liste
+                        </a>
+
+                        {% if user.is_staff %}
+                            <a href="{% url 'conference_update' object.conference_id %}" class="btn btn-warning btn-lg px-5 me-3">
+                                <i class="fa fa-edit me-2"></i> Modifier
+                            </a>
+                            <a href="{% url 'conference_delete' object.conference_id %}" class="btn btn-danger btn-lg px-5">
+                                <i class="fa fa-trash me-2"></i> Supprimer
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if user.is_staff %}
+        <div class="alert alert-info text-center mt-5 shadow-sm">
+            <i class="fa fa-crown me-2"></i>
+            <strong>Mode Admin :</strong> Gérez cette conférence.
+            <a href="{% url 'admin:index' %}" class="btn btn-warning ms-3 btn-sm">Dashboard Admin</a>
+        </div>
+    {% endif %}
