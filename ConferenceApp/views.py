@@ -43,7 +43,7 @@ class ConferenceDetailView(DetailView):
 
 class ConferenceCreateView(CreateView):
     model = Conference
-    # fields = "__all__"
+    # fields = "__all__" or []
     success_url = reverse_lazy("conference_list_view")
     form_class = ConferenceForm
 
